@@ -308,14 +308,6 @@ public class ApiContextDO{
         this.ele = ele;
     }
 
-    //	public String getCst() {
-	//		return cst;
-	//	}
-	//
-	//	public void setCst(String cst) {
-	//		this.cst = cst;
-	//	}
-
 
     public boolean isApiVersionFromUrl() {
         return apiVersionFromUrl;
