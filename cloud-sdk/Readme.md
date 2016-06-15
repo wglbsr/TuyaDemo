@@ -10,7 +10,8 @@ http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
 
 ## SDK使用
 
-```
+```java
+
     //创建 cloud client(accessId, accessKey由tuya这边提供)
     String endUri = "http://a1.tuyacn.com/api.json";
     String accessId = "xxxx";
