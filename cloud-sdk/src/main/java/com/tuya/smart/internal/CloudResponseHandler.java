@@ -1,21 +1,21 @@
 package com.tuya.smart.internal;
 
-import com.alibaba.fastjson.JSONObject;
-import org.apache.http.entity.ContentType;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpResponseException;
-import java.nio.charset.Charset;
-import java.io.BufferedReader;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
-import java.util.HashMap;
-import java.util.Map;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.tuya.smart.model.ResponseMessage;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import com.tuya.smart.model.ResponseMessage;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.entity.ContentType;
 
 public class CloudResponseHandler implements ResponseHandler<ResponseMessage> {
 

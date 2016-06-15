@@ -1,26 +1,26 @@
 package com.tuya.smart;
 
 import com.tuya.smart.internal.AtopThirdCloudMobileSignUtil;
-import java.util.List;
-import java.util.ArrayList;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.Consts;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.message.BasicNameValuePair;
 import com.tuya.smart.internal.CloudResponseHandler;
 import com.tuya.smart.model.RequestMessage;
 import com.tuya.smart.model.ResponseMessage;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.Consts;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 
-public class CloudClient {
+public class TuyaCloudClient {
 
     private String accessId;
     private String accessKey;
     private String endUri;
 
-    public CloudClient(String accessId, String accessKey,String endUri) {
+    public TuyaCloudClient(String accessId, String accessKey,String endUri) {
         this.accessId = accessId;
         this.accessKey = accessKey;
         this.endUri = endUri;

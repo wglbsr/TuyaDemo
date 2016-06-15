@@ -16,7 +16,7 @@ http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
     String endUri = "http://a1.tuyacn.com/api.json";
     String accessId = "xxxx";
     String accessKey = "xxxxxxxxxxx";
-    CloudClient client = new CloudClient(accessId,accessKey, endUri);
+    TuyaCloudClient client = new TuyaCloudClient(accessId,accessKey, endUri);
 
     //新建请求对象
     RequestMessage request = new RequestMessage();
@@ -35,10 +35,18 @@ http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
 
 
     //发送请求, 得到响应
-    //如果是成功请求, 则response里的result会是个JSON对象
+    //如果是成功请求, 则response里的result会是个JSON对象封装的请求结果.
+    //如果失败, 请查看errorMsg和errorCode,进行相应的处理.
     ResponseMessage response=client.sendRequest(request);
-    String result = JSONObject.toJSONString( response.getResult(),true);
-    System.out.println(result);
+    if (response.isSuccess()) {
+        String result = JSONObject.toJSONString( response.getResult(),true);
+        System.out.println(result);
+    } else {
+        String errorCode = response.getErrorCode();
+        String errorMsg = response.getErrorMsg();
+        System.out.println(errorMsg);
+    }
+
 
 ```
 
