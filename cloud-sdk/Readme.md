@@ -6,6 +6,7 @@ cloud-sdk是涂鸦云对云API的java封装, 对http方式提供的接口进行�
 签名, 基础参数设置等. 方便使用java的客户进行接口调用.
 
 API列表见: [Tuya Open API](http://api.tuya.com/)
+
 http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
 
 ## SDK使用
@@ -20,11 +21,14 @@ http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
 
     //新建请求对象
     RequestMessage request = new RequestMessage();
-    request.setApi("s.m.dev.list.group.list");
+    request.setApi("tuya.m.user.uid.register");
     request.setApiVersion("1.0");
-    request.setOs("iOs");
+    request.setOs("centOS-6");
     request.setDeviceid("ppstrong");
     request.setLang("zh");
+
+    //注:除注册及获取统计数据等少量接口,大部份接口都需要sessionId
+    //可以从注册和登录接口返回结果得到,返回结果字段为sid
     request.setSession("asdfasdf");
 
     //如果接口需要入参,则能过 map设置
@@ -32,6 +36,7 @@ http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
     params.put("uid","mmmmmmmmmm");
     params.put("countryCode","86");
     params.put("passwd","faint");
+    request.setParams(params);
 
 
     //发送请求, 得到响应
@@ -50,4 +55,28 @@ http方式调用指南: [Tuya docs](http://docs.tuya.com/develop/cloudapi/api/)
 
 ```
 
+注册接口成功返回的response.getResult()对象.
+```json
+{
+	"uid":"ay1466135026676FK2vo",
+	"sid":"ay14661305026676FfK2voB3f29196a14982b7b013b13163db55767f",
+	"username":"mmmmmmmmmm",
+	"sex":0,
+	"ecode":"y5y611y4a6a11131",
+	"phoneCode":"86",
+	"nickname":"",
+	"partnerIdentity":"p1000019",
+	"snsNickname":"",
+	"domain":{
+		"regionCode":"AY",
+		"gwApiUrl":"http://a.gw.tuyacn.com/gw.json",
+		"gwMqttUrl":"mq.gw.tuyacn.com",
+		"mobileMqttUrl":"mq.mb.tuyacn.com",
+		"mobileApiUrl":"https://a1.tuyacn.com"
+	},
+	"headPic":"",
+	"userType":1
+}
+```
 
+注册接口返回的uid,sid,ecode,domain等信息在后续请求中还会用到,请妥善保存.

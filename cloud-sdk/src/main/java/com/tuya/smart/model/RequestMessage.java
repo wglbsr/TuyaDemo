@@ -41,7 +41,8 @@ public class RequestMessage {
         for (String key : params.keySet()) {
             json.put(key, params.get(key));
         }
-        return json.toJSONString();
+        String data= json.toJSONString();
+        return data;
     }
 
 
