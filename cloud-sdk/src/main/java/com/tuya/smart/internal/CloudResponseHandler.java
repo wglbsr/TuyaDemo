@@ -44,7 +44,7 @@ public class CloudResponseHandler implements ResponseHandler<ResponseMessage> {
         try {
             Map<String, Object> resultMap = JSON.parseObject(sb.toString(), HashMap.class);
             ResponseMessage msg = new ResponseMessage();
-            Boolean success = (boolean)resultMap.get("success");
+            Boolean success = (Boolean)resultMap.get("success");
             if (success) {
                 msg.setSuccess(true);
                 msg.setResult((JSONObject)resultMap.get("result"));
