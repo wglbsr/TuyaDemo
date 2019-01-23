@@ -19,6 +19,8 @@ public class MqConsumer {
 
 	private String				accessKey;
 
+	private MqEnv				env					= MqEnv.PROD;
+
 	private int					maxRedeliverCount	= 3;
 
 	private IMessageListener	messageListener;
@@ -39,6 +41,11 @@ public class MqConsumer {
 
 	public MqConsumer accessKey(String accessKey) {
 		this.accessKey = accessKey;
+		return this;
+	}
+
+	public MqConsumer env(MqEnv env) {
+		this.env = env;
 		return this;
 	}
 
@@ -72,7 +79,7 @@ public class MqConsumer {
 		}
 		PulsarClient client = PulsarClient.builder().serviceUrl(serviceUrl).allowTlsInsecureConnection(true)
 				.authentication(new MqAuthentication(accessId, accessKey)).build();
-		Consumer consumer = client.newConsumer().topic(String.format("%s/out/event", accessId))
+		Consumer consumer = client.newConsumer().topic(String.format("%s/out/%s", accessId, env.getValue()))
 				.subscriptionName(String.format("%s-sub", accessId)).subscriptionType(SubscriptionType.Failover)
 				.deadLetterPolicy(DeadLetterPolicy.builder().maxRedeliverCount(maxRedeliverCount).build()).subscribe();
 		do {
