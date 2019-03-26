@@ -14,14 +14,14 @@ public class ConsumerExample {
         String accessId = "";
         String accessKey = "";
 
+
         MqConsumer mqConsumer = MqConsumer.build().serviceUrl(url).accessId(accessId).accessKey(accessKey)
                 .maxRedeliverCount(3).messageListener(message -> {
+                            System.out.println("---------------------------------------------------");
                             System.out.println("Message received:" + new String(message.getData()) + ",seq="
                                     + message.getSequenceId() + ",time=" + message.getPublishTime() + ",consumed time="
                                     + System.currentTimeMillis() + ",partition="
                                     + ((TopicMessageIdImpl) message.getMessageId()).getTopicPartitionName());
-
-                            System.out.println("---------------------------------------------------");
                             String jsonMessage = new String(message.getData());
                             MessageVO vo = JSON.parseObject(jsonMessage, MessageVO.class);
                             System.out.println("the real message data:" + AESBase64Utils.decrypt(vo.getData(), accessKey.substring(8, 24)));
