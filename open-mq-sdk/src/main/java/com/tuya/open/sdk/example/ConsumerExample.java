@@ -14,7 +14,6 @@ public class ConsumerExample {
         String accessId = "";
         String accessKey = "";
 
-
         MqConsumer mqConsumer = MqConsumer.build().serviceUrl(url).accessId(accessId).accessKey(accessKey)
                 .maxRedeliverCount(3).messageListener(message -> {
                             System.out.println("---------------------------------------------------");
