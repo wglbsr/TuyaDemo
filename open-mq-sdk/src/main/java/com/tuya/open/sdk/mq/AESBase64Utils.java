@@ -11,13 +11,13 @@ import org.apache.pulsar.shade.org.apache.commons.codec.binary.StringUtils;
 
 public class AESBase64Utils {
 
-    private static final String AES = "AES";
+    private static final String	AES	= "AES";
 
     // 加密算法
-    private String ALGO;
+    private String				ALGO;
 
     // 16位的加密密钥
-    private byte[] keyValue;
+    private byte[]				keyValue;
 
     /**
      * 用来进行加密的操作
@@ -101,14 +101,4 @@ public class AESBase64Utils {
         return aes.encrypt(data);
     }
 
-
-    public static void main(String[] args) {
-        String data = "";
-        String key = "";
-        try {
-            System.out.println(decrypt(data, key.substring(8, 24)));
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-    }
 }
