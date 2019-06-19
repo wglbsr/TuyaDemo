@@ -3,6 +3,8 @@ package com.tuya.open.sdk.utils;
 import com.tuya.open.sdk.mq.MqConfigs;
 import com.tuya.open.sdk.mq.MqEnv;
 import org.apache.pulsar.client.api.*;
+
+import java.util.Objects;
 import java.util.concurrent.*;
 
 /**
@@ -19,7 +21,19 @@ public class PulsarConsumerPoolFactory {
     private static class InitializingConsumerPool {
         private static final ConcurrentHashMap<Integer, Consumer> pool = new ConcurrentHashMap<Integer, Consumer>() {{
             for (int i = 1; i <= MqConfigs.CONSUMER_NUM; i++) {
-                put(i, getConsumerInstance());
+                //
+                int retryTimes = getRetryTimes();
+                Consumer consumer = getConsumerInstance();
+                while (Objects.isNull(consumer) && retryTimes > 0) {
+                    retryTimes--;
+                    consumer = getConsumerInstance();
+                }
+                //
+                if (Objects.isNull(consumer)) {
+                    System.out.println("PulsarConsumerPoolFactory create consumer error! and have retry two times!");
+                    continue;
+                }
+                put(i, consumer);
             }
         }};
 
@@ -33,6 +47,11 @@ public class PulsarConsumerPoolFactory {
                 System.err.println("PulsarConsumerPoolFactory init error! e=" + e);
                 return null;
             }
+        }
+
+
+        public static int getRetryTimes() {
+            return 2;
         }
     }
 

@@ -11,5 +11,5 @@ public class MqConfigs {
     public final static String accessKey = "";
 
     public final static Integer MAX_REDELIVER_COUNT = 3;
-    public final static Integer CONSUMER_NUM= 11;
+    public final static Integer CONSUMER_NUM= 3;
 }
