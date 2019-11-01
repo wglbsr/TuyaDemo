@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.tuya.open.sdk.example.MessageVO;
 import org.apache.pulsar.client.api.Consumer;
 import org.apache.pulsar.client.api.Message;
-import org.apache.pulsar.client.impl.TopicMessageIdImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,8 +32,7 @@ public class MessageHandlerTask implements Runnable {
                 System.out.println("----------------consumerNum:" + consumerNum + ";consumerName:" + consumer.getConsumerName() + "--------------------");
                 System.out.println("Message Received:" + new String(message.getData()) + ",seq="
                         + message.getSequenceId() + ",time=" + message.getPublishTime() + ",consumed time="
-                        + System.currentTimeMillis() + ",partition="
-                        + ((TopicMessageIdImpl) message.getMessageId()).getTopicPartitionName());
+                        + System.currentTimeMillis());
                 String jsonMessage = new String(message.getData());
                 MessageVO vo = JSON.parseObject(jsonMessage, MessageVO.class);
                 System.out.println("Decrypt Message Data:" + AESBase64Utils.decrypt(vo.getData(), MqConfigs.accessKey.substring(8, 24)));

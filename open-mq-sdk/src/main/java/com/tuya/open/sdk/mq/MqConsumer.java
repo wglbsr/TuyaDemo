@@ -88,7 +88,7 @@ public class MqConsumer {
 				messageListener.onMessageArrived(message);
 				consumer.acknowledge(message);
 			} catch (Throwable t) {
-				logger.error("", t);
+				logger.error("error:", t);
 			}
 		} while (true);
 	}
