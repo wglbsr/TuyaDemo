@@ -3,7 +3,6 @@ package com.tuya.open.sdk.example;
 
 import com.alibaba.fastjson.JSON;
 import com.tuya.open.sdk.mq.AESBase64Utils;
-import org.apache.pulsar.client.impl.TopicMessageIdImpl;
 
 import com.tuya.open.sdk.mq.MqConsumer;
 
@@ -19,8 +18,7 @@ public class ConsumerExample {
                             System.out.println("---------------------------------------------------");
                             System.out.println("Message received:" + new String(message.getData()) + ",seq="
                                     + message.getSequenceId() + ",time=" + message.getPublishTime() + ",consumed time="
-                                    + System.currentTimeMillis() + ",partition="
-                                    + ((TopicMessageIdImpl) message.getMessageId()).getTopicPartitionName());
+                                    + System.currentTimeMillis());
                             String jsonMessage = new String(message.getData());
                             MessageVO vo = JSON.parseObject(jsonMessage, MessageVO.class);
                             System.out.println("the real message data:" + AESBase64Utils.decrypt(vo.getData(), accessKey.substring(8, 24)));
