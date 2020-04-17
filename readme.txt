@@ -1,6 +1,3 @@
-# Tuaya Open Api 调用Demo和SDK
-# Tuya Open Message 调用Demo和SDK
-
 #打包
 cd到open-mq-sdk然后执行
 mvn package assembly:single
