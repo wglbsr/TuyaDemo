@@ -63,7 +63,6 @@ public class YouniIotTuyaConsumer {
             return null;
         }
 
-
         try {
             return echo.connect();
         } catch (Exception e) {
